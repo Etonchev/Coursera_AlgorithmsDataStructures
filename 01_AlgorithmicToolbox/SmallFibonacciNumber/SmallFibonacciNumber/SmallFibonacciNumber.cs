@@ -25,11 +25,6 @@ namespace SmallFibonacciNumber
                 return firstFibonacciNumber;
             }
 
-            if(firstFibonacciNumber == 1)
-            {
-                return secondFibonacciNumber;
-            }
-
             while(fibonacciIndex > 1)
             {
                 var previous = secondFibonacciNumber;
