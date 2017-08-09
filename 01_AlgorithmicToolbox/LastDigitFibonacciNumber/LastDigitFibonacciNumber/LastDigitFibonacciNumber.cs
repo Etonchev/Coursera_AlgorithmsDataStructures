@@ -9,7 +9,7 @@ namespace LastDigitFibonacciNumber
             var fibonacciIndex = long.Parse(Console.ReadLine());
             if (fibonacciIndex < 0)
             {
-                throw new ArgumentException("Invalid argument!");
+                throw new ArgumentException();
             }
 
             var lastDigitFibonacciNumber = CalculateLastDigitFibonacciNumber(fibonacciIndex);

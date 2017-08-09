@@ -9,7 +9,7 @@ namespace SmallFibonacciNumber
             var fibonacciIndex = int.Parse(Console.ReadLine());
             if(fibonacciIndex < 0)
             {
-                throw new ArgumentException("Invalid argument!");
+                throw new ArgumentException();
             }
 
             var fibonacciNumber = CalculateFibonacciNumber(fibonacciIndex);

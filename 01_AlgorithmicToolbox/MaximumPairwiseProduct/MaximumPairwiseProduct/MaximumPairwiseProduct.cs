@@ -9,7 +9,7 @@ namespace MaximumPairwiseProduct
             var length = int.Parse(Console.ReadLine());
             if(length < 2)
             {
-                throw new ArgumentException("Invalid input!");
+                throw new ArgumentException();
             }
 
             var input = Console.ReadLine().Split(' ');
