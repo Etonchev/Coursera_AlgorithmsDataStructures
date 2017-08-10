@@ -20,18 +20,38 @@ namespace LastDigitPartialFibonacciSum
 
         private static byte CalculateLastDigitPartialSumFibonacci(long startIndex, long endIndex)
         {
-            var wholeRangeSum = CalculateLastDigitsSumFibonacciNumber(endIndex, 100);
-            if(startIndex == 0)
+            var startIndexModulo = 10;
+            var endIndexModulo = 100;
+            var startIndexPisanoPeriod = CalculatePisanoPeriod(startIndexModulo);
+            var endIndexPisanoPeriod = CalculatePisanoPeriod(endIndexModulo);
+
+            //Using the pisano period we lower the value for start and end index
+            var smallerStartIndex = startIndex - 1;
+            var smallerEndIndex = endIndex;
+            if (smallerStartIndex >= 2)
+            {
+                smallerStartIndex %= startIndexPisanoPeriod;
+            }
+            if (smallerEndIndex >= 2)
+            {
+                smallerEndIndex %= endIndexPisanoPeriod;
+            }
+
+
+            var wholeRangeSum = CalculateLastDigitsSumFibonacciNumber(smallerEndIndex, endIndexModulo);
+            if(smallerStartIndex == 0)
             {
                 return (byte)(wholeRangeSum % 10);
             }
-            if(wholeRangeSum == 0)
+            //3-digit Fibonacci numbers start from index 10
+            if(wholeRangeSum == 0 && smallerEndIndex > 10)
             {
                 wholeRangeSum = 100;
             }
 
-            var excluded = CalculateLastDigitsSumFibonacciNumber(startIndex - 1, 10);
-            if(excluded == 0)
+            var excluded = CalculateLastDigitsSumFibonacciNumber(smallerStartIndex, startIndexModulo);
+            //2-digit Fibonacci numbers start from index 5
+            if(excluded == 0 && smallerStartIndex > 5)
             {
                 excluded = 10;
             }
@@ -62,6 +82,27 @@ namespace LastDigitPartialFibonacciSum
             }
 
             return lastDigitSum;
+        }
+
+        private static long CalculatePisanoPeriod(long modulo)
+        {
+            long firstFibonacciNumber = 0;
+            long secondFibonacciNumber = 1;
+            var pisanoPeriod = 0;
+
+            for (int i = 1; i < modulo * modulo; i++)
+            {
+                var previous = secondFibonacciNumber;
+                secondFibonacciNumber = (secondFibonacciNumber + firstFibonacciNumber) % modulo;
+                firstFibonacciNumber = previous;
+                if (firstFibonacciNumber == 0 && secondFibonacciNumber == 1)
+                {
+                    pisanoPeriod = i;
+                    break;
+                }
+            }
+
+            return pisanoPeriod;
         }
     }
 }
