@@ -25,33 +25,32 @@ namespace LastDigitPartialFibonacciSum
             var startIndexPisanoPeriod = CalculatePisanoPeriod(startIndexModulo);
             var endIndexPisanoPeriod = CalculatePisanoPeriod(endIndexModulo);
 
+            startIndex--;
             //Using the pisano period we lower the value for start and end index
-            var smallerStartIndex = startIndex - 1;
-            var smallerEndIndex = endIndex;
-            if (smallerStartIndex >= 2)
+            if (startIndex >= 2)
             {
-                smallerStartIndex %= startIndexPisanoPeriod;
+                startIndex %= startIndexPisanoPeriod;
             }
-            if (smallerEndIndex >= 2)
+            if (endIndex >= 2)
             {
-                smallerEndIndex %= endIndexPisanoPeriod;
+                endIndex %= endIndexPisanoPeriod;
             }
 
-
-            var wholeRangeSum = CalculateLastDigitsSumFibonacciNumber(smallerEndIndex, endIndexModulo);
-            if(smallerStartIndex == 0)
+            var wholeRangeSum = CalculateLastDigitsSumFibonacciNumber(endIndex, endIndexModulo);
+            if(startIndex == 0)
             {
                 return (byte)(wholeRangeSum % 10);
             }
+
             //3-digit Fibonacci numbers start from index 10
-            if(wholeRangeSum == 0 && smallerEndIndex > 10)
+            if(wholeRangeSum == 0 && endIndex > 10)
             {
                 wholeRangeSum = 100;
             }
 
-            var excluded = CalculateLastDigitsSumFibonacciNumber(smallerStartIndex, startIndexModulo);
+            var excluded = CalculateLastDigitsSumFibonacciNumber(startIndex, startIndexModulo);
             //2-digit Fibonacci numbers start from index 5
-            if(excluded == 0 && smallerStartIndex > 5)
+            if(excluded == 0 && startIndex > 5)
             {
                 excluded = 10;
             }
