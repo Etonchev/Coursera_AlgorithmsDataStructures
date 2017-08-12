@@ -40,6 +40,7 @@ Explanation: 2 = 1 + 1
 Input
 ----|
 28
+
 Output
 -----|
 6
