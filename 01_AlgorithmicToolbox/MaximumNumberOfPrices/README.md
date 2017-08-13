@@ -10,7 +10,7 @@ value of *𝑘* for which it is possible.
 
 **Task.** The goal of this problem is to represent a given positive integer *𝑛* as a sum of as many pairwise
 distinct positive integers as possible. That is, to find the maximum *𝑘* such that *𝑛* can be written as
-*𝑎<sub>1</sub>* + *𝑎<sub>2</sub>* + · · · + *𝑎<sub>𝑘</sub>* where *𝑎<sub>1</sub>*, . . . , *𝑎<sub>𝑘</sub>* are positive integers and *𝑎<sub>𝑖</sub>* ̸= *𝑎<sub>𝑗</sub>* for all 1 ≤ *𝑖* < *𝑗* ≤ *𝑘*.
+*𝑎<sub>1</sub>* + *𝑎<sub>2</sub>* + · · · + *𝑎<sub>𝑘</sub>* where *𝑎<sub>1</sub>*, . . . , *𝑎<sub>𝑘</sub>* are positive integers and *𝑎<sub>𝑖</sub>* &nbsp; ̸= *𝑎<sub>𝑗</sub>* for all 1 ≤ *𝑖* < *𝑗* ≤ *𝑘*.
 
 **Input Format.** The input consists of a single integer *𝑛*.
 Constraints. 1 ≤ *𝑛* ≤ 10<sup>9</sup>
