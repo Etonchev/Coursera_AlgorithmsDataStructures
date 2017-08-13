@@ -1,24 +1,30 @@
 ### Problem Introduction
 
-You have *𝑛* ads to place on a popular Internet page. For each ad, you know how
-much is the advertiser willing to pay for one click on this ad. You have set up *𝑛*
-slots on your page and estimated the expected number of clicks per day for each
-slot. Now, your goal is to distribute the ads among the slots to maximize the
-total revenue.
+You are responsible for collecting signatures from all tenants of a certain building.
+For each tenant, you know a period of time when he or she is at home.
+You would like to collect all signatures by visiting the building as few times as
+possible.
+The mathematical model for this problem is the following. You are given a set
+of segments on a line and your goal is to mark as few points on a line as possible
+so that each segment contains at least one marked point.
 
 ### Problem Description
 
-**Task.** Given two sequences *𝑎<sub>1</sub>*, *𝑎<sub>2</sub>*, . . . , *𝑎<sub>n</sub>* (*𝑎<sub>i</sub>* is the profit per click of the *𝑖*-th ad) and *𝑏<sub>1</sub>*, 
-*𝑏<sub>2</sub>*, . . . , *𝑏<sub>n</sub>* (*𝑏<sub>i</sub>* is
-the average number of clicks per day of the *𝑖*-th slot), we need to partition them into *𝑛* pairs (*𝑎<sub>i</sub>*, *𝑏<sub>j</sub>* ) such that the sum of their 
-products is maximized.
+**Task.** Given a set of *𝑛* segments {[*𝑎<sub>0</sub>*, *𝑏<sub>0</sub>*], [*𝑎<sub>1</sub>*, *𝑏<sub>1</sub>*], . . . , [*𝑎<sub>𝑛−1</sub>*, *𝑏<sub>𝑛−1</sub>*]} with integer coordinates on a line, find
+the minimum number *𝑚* of points such that each segment contains at least one point. That is, find a
+set of integers *𝑋* of the minimum size such that for any segment [*𝑎<sub>𝑖</sub>*, *𝑏<sub>𝑖</sub>*] there is a point *𝑥* ∈ *𝑋* such
+that *𝑎<sub>𝑖</sub>* ≤ *𝑥* ≤ *𝑏<sub>𝑖</sub>*
 
-**Input Format.** The first line contains an integer *𝑛*, the second one contains a sequence of integers
-*𝑎<sub>1</sub>*, *𝑎<sub>2</sub>*, . . . , *𝑎<sub>n</sub>*, the third one contains a sequence of integers *𝑏<sub>1</sub>*, *𝑏<sub>2</sub>*, . . . , *𝑏<sub>n</sub>*.
+**Input Format.** The first line of the input contains the number 𝑛 of segments. Each of the following *𝑛* lines
+contains two integers *𝑎<sub>𝑖</sub>* and *𝑏<sub>𝑖</sub>* (separated by a space) defining the coordinates of endpoints of the *𝑖*-th
+segment.
 
-**Constraints.** 1 ≤ *𝑛* ≤ 10<sup>3</sup>; −10<sup>5</sup> ≤ *𝑎<sub>i</sub>*, *𝑏<sub>i</sub>* ≤ 10<sup>5</sup> for all 1 ≤ *𝑖* ≤ *𝑛*.
+**Constraints.** 1 ≤ *𝑛* ≤ 100; 0 ≤ *𝑎<sub>𝑖</sub>* ≤ *𝑏<sub>𝑖</sub>* ≤ 10<sup>9</sup> for all 0 ≤ *𝑖* < *𝑛*.
 
-**Output Format.** Output the maximum value of ∑︀*𝑎<sub>i</sub>𝑐<sub>i</sub>*, where *𝑐<sub>1</sub>*, *𝑐<sub>2</sub>*, . . . , *𝑐<sub>n</sub>* is a permutation of *𝑏<sub>1</sub>*, *𝑏<sub>2</sub>*, . . . , *𝑏<sub>n</sub>*.
+**Output Format.** Output the minimum number *𝑚* of points on the first line and the integer coordinates
+of *𝑚* points (separated by spaces) on the second line. You can output the points in any order. If there
+are many such sets of points, you can output any set. (It is not difficult to see that there always exist
+a set of points of the minimum size such that all the coordinates of the points are integers.)
 
 **Time Limits.** 
 
@@ -32,40 +38,35 @@ products is maximized.
 
 |Input|
 |-----|
-|1|
-|23|
-|39|
+|3|
+|1 3|
+|2 5|
+|3 6|
 
 |Output|
 |------|
-|897|
+|1|
+|3|
 
-Explanation: 897 = 23 · 39
+Explanation: In this sample, we have three segments: [1, 3], [2, 5], [3, 6] (of length 2, 3, 3 respectively).
+All of them contain the point with coordinate 3: 1 ≤ 3 ≤ 3, 2 ≤ 3 ≤ 5, 3 ≤ 3 ≤ 6.
 
 **Sample 2**
 
 |Input|
 |-----|
-|3|
-|1 3 -5|
-|-2 4 1|
-
-|Output|
-|------|
-|23|
-
-Explanation: 23 = 3 · 4 + 1 · 1 + (−5) · (−2)
-
-**Sample 3**
-
-|Input|
-|-----|
 |4|
-|-4 10 12 20|
-|-9 -3 -2 6|
+|4 7|
+|1 3|
+|2 5|
+|5 6|
 
 |Output|
 |------|
-|102|
+|2|
+|3 6|
 
-Explanation: 102 = 20 · 6 + 12 · (-2) + 10 · (-3) + (-4) · (-9)
+Explanation:
+The second and the third segments contain the point with coordinate 3 while the first and the fourth
+segments contain the point with coordinate 6. All the four segments cannot be covered by a single
+point, since the segments [1, 3] and [5, 6] are disjoint.
