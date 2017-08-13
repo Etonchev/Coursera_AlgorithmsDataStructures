@@ -1,4 +1,4 @@
-### Problem Introduction
+﻿### Problem Introduction
 
 You are responsible for collecting signatures from all tenants of a certain building.
 For each tenant, you know a period of time when he or she is at home.
@@ -15,7 +15,7 @@ the minimum number *𝑚* of points such that each segment contains at least one
 set of integers *𝑋* of the minimum size such that for any segment [*𝑎<sub>𝑖</sub>*, *𝑏<sub>𝑖</sub>*] there is a point *𝑥* ∈ *𝑋* such
 that *𝑎<sub>𝑖</sub>* ≤ *𝑥* ≤ *𝑏<sub>𝑖</sub>*
 
-**Input Format.** The first line of the input contains the number 𝑛 of segments. Each of the following *𝑛* lines
+**Input Format.** The first line of the input contains the number *𝑛* of segments. Each of the following *𝑛* lines
 contains two integers *𝑎<sub>𝑖</sub>* and *𝑏<sub>𝑖</sub>* (separated by a space) defining the coordinates of endpoints of the *𝑖*-th
 segment.
 
