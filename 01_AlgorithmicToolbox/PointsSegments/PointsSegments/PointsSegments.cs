@@ -25,24 +25,24 @@ namespace PointsSegments
             }
 
             var pairsSorted = pairs.OrderBy(p => p.Value).ThenBy(p => p.Key).ToList();
-            var unclosedParenthesis = 0L;
+            var unclosedSegments = 0L;
             foreach (var pair in pairsSorted)
             {
                 switch (pair.Key)
                 {
                     case "left":
                     {
-                        unclosedParenthesis++;
+                        unclosedSegments++;
                         break;
                     }
                     case "right":
                     {
-                        unclosedParenthesis--;
+                        unclosedSegments--;
                         break;
                     }
                     case "point":
                     {
-                        pointInclusion[pair.Value] = unclosedParenthesis;
+                        pointInclusion[pair.Value] = unclosedSegments;
                         break;
                     }
                     default:
