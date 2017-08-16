@@ -4,48 +4,16 @@ using System.Linq;
 
 namespace PointsSegments
 {
-    public class Segment
-    {
-        public long Start { get; set; }
-        public long End { get; set; }
-    }
-
-    public enum SegmentPart
-    {
-        Start,
-        End
-    }
-
     class PointsSegments
     {
-        public static long[] NaiveImplementation(Segment[] segments, long[] points)
-        {
-            var result = new long[points.LongLength];
-            for (long i = 0; i < points.LongLength; i++)
-            {
-                var count = 0;
-                foreach (var segment in segments)
-                {
-                    if (points[i] >= segment.Start && points[i] <= segment.End)
-                    {
-                        count++;
-                    }
-                }
-
-                result[i] = count;
-            }
-
-            return result;
-        }
-
         public static Dictionary<long, long> CalculateNumberOfInclusions(Segment[] segments, long[] points)
         {
             var pointInclusion = new Dictionary<long, long>();
             var pairs = new List<KeyValuePair<string, long>>();
             foreach (var segment in segments)
             {
-                pairs.Add(new KeyValuePair<string, long>("left", segment.Start));
-                pairs.Add(new KeyValuePair<string, long>("right", segment.End));
+                pairs.Add(new KeyValuePair<string, long>("left", segment.Left));
+                pairs.Add(new KeyValuePair<string, long>("right", segment.Right));
             }
             foreach (var point in points)
             {
@@ -58,43 +26,48 @@ namespace PointsSegments
 
             var pairsSorted = pairs.OrderBy(p => p.Value).ThenBy(p => p.Key).ToList();
             var unclosedParenthesis = 0L;
-            for (int i = 0; i < pairsSorted.Count; i++)
+            foreach (var pair in pairsSorted)
             {
-                switch (pairsSorted[i].Key)
+                switch (pair.Key)
                 {
                     case "left":
-                        {
-                            unclosedParenthesis++;
-                            break;
-                        }
+                    {
+                        unclosedParenthesis++;
+                        break;
+                    }
                     case "right":
-                        {
-                            unclosedParenthesis--;
-                            break;
-                        }
+                    {
+                        unclosedParenthesis--;
+                        break;
+                    }
                     case "point":
-                        {
-                            if (unclosedParenthesis > 0)
-                            {
-                                pointInclusion[pairsSorted[i].Value] = unclosedParenthesis;
-                            }
-                            else
-                            {
-                                pointInclusion[pairsSorted[i].Value] = 0;
-                            }
-                            break;
-                        }
+                    {
+                        pointInclusion[pair.Value] = unclosedParenthesis;
+                        break;
+                    }
                     default:
-                        {
-                            throw new Exception("Invalid pair");
-                        }
+                    {
+                        throw new Exception("Invalid pair");
+                    }
                 }
             }
 
             return pointInclusion;
         }
 
-        static void Main()
+        public class Segment
+        {
+            public long Left { get; set; }
+            public long Right { get; set; }
+
+            public Segment(long left, long right)
+            {
+                Left = left;
+                Right = right;
+            }
+        }
+
+        private static void Main()
         {
             var input = Array.ConvertAll(Console.ReadLine().Split(' '), long.Parse);
             var numberOfSegments = input[0];
@@ -102,12 +75,11 @@ namespace PointsSegments
             for (long i = 0; i < numberOfSegments; i++)
             {
                 input = Array.ConvertAll(Console.ReadLine().Split(' '), long.Parse);
-                segments[i] = new Segment();
-                segments[i].Start = input[0];
-                segments[i].End = input[1];
+                segments[i] = new Segment(left: input[0], right: input[1]);
             }
 
             var points = Array.ConvertAll(Console.ReadLine().Split(' '), long.Parse);
+
             var result = CalculateNumberOfInclusions(segments, points);
             foreach (var point in points)
             {
